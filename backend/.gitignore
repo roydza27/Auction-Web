@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Build outputs
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Uploads & local media
+uploads/
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.gif
+*.ico
+*.svg
+*.bmp
+*.tiff
+
+# Private datasets & spreadsheets
+*.csv
+*.tsv
+*.xlsx
+*.xls
+clean_players.json
+clean_players.csv
+
+# Python cache (if running local scripts)
+__pycache__/
+*.py[cod]
