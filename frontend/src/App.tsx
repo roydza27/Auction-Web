@@ -1,0 +1,32 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuctionProvider } from './contexts/AuctionContext';
+import ErrorBoundary from './components/ErrorBoundary';
+import Layout from './layouts/Layout';
+import AuctionPage from './pages/AuctionPage';
+import TeamsPage from './pages/TeamsPage';
+import PlayersPage from './pages/PlayersPage';
+import UnsoldPage from './pages/UnsoldPage';
+import ResultsPage from './pages/ResultsPage';
+
+function App() {
+  return (
+    <ErrorBoundary>
+      <Router>
+        <AuctionProvider>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<AuctionPage />} />
+              <Route path="/teams" element={<TeamsPage />} />
+              <Route path="/players" element={<PlayersPage />} />
+              <Route path="/unsold" element={<UnsoldPage />} />
+              <Route path="/results" element={<ResultsPage />} />
+            </Routes>
+          </Layout>
+        </AuctionProvider>
+      </Router>
+    </ErrorBoundary>
+  );
+}
+
+export default App;
