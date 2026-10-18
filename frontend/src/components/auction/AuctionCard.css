@@ -1,0 +1,312 @@
+/* ==========================================================================
+   AUCTION CARD - LUXURY DESIGNER EDITION
+   High-visibility, large-scale player presentation card for live auction hall
+   ========================================================================== */
+
+/* Entrance & Reveal Animations */
+@keyframes elegantEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.94) translateY(20px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes luxuryGlow {
+  0%, 100% {
+    box-shadow: 0 10px 50px rgba(234, 179, 8, 0.25), inset 0 0 30px rgba(234, 179, 8, 0.08);
+  }
+  50% {
+    box-shadow: 0 20px 80px rgba(234, 179, 8, 0.45), inset 0 0 50px rgba(234, 179, 8, 0.15);
+  }
+}
+
+@keyframes goldShimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+
+@keyframes photoReveal {
+  0% {
+    opacity: 0;
+    filter: blur(15px);
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes badgeEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) rotate(-6deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+}
+
+@keyframes contentFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rotateRing {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Luxury Button Animations */
+@keyframes elegantPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes floatParticle {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-8px) scale(1.2);
+    opacity: 0.9;
+  }
+}
+
+/* Classes & Components */
+.auction-card-wrapper {
+  animation: elegantEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.luxury-auction-card-container {
+  animation: luxuryGlow 6s ease-in-out infinite;
+  backdrop-filter: blur(16px);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.auction-photo-reveal {
+  animation: photoReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Corner Action Dock for Bidding & Decisions */
+.auction-corner-dock {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1.5px solid rgba(245, 158, 11, 0.35);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+}
+
+.auction-rotating-ring {
+  animation: rotateRing 10s linear infinite;
+}
+
+.auction-badge-entrance {
+  animation: badgeEntrance 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
+  opacity: 0;
+}
+
+.auction-fade-1 {
+  animation: contentFadeIn 0.6s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.auction-fade-2 {
+  animation: contentFadeIn 0.6s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+.auction-fade-3 {
+  animation: contentFadeIn 0.6s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+.auction-fade-4 {
+  animation: contentFadeIn 0.6s ease-out 0.5s forwards;
+  opacity: 0;
+}
+
+.auction-particle {
+  animation: floatParticle 3s ease-in-out infinite;
+}
+
+/* Ultra Premium SOLD / UNSOLD Buttons */
+.auction-sold-button,
+.auction-unsold-button {
+  position: relative;
+  cursor: pointer;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  transform-style: preserve-3d;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.auction-sold-button:hover:not(:disabled),
+.auction-unsold-button:hover:not(:disabled) {
+  transform: translateY(-5px) scale(1.03);
+  filter: brightness(1.15) contrast(1.08);
+}
+
+.auction-sold-button:active:not(:disabled),
+.auction-unsold-button:active:not(:disabled) {
+  transform: translateY(-1px) scale(1.01);
+  transition: all 0.1s ease-out;
+}
+
+.auction-sold-button:hover:not(:disabled)::before,
+.auction-unsold-button:hover:not(:disabled)::before {
+  animation: elegantPulse 2s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   OFFICIAL APL SEASON 10 BIDDING CONSOLE STYLES
+   ========================================================================== */
+
+.bidding-console-header {
+  background: linear-gradient(135deg, rgba(20, 24, 38, 0.95) 0%, rgba(10, 12, 20, 0.95) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.franchise-calling-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 10px;
+}
+
+.franchise-chip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.franchise-chip:hover:not(:disabled) {
+  border-color: rgba(212, 175, 55, 0.7);
+  background: rgba(30, 41, 59, 0.95);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.franchise-chip.selected {
+  border-color: #D4AF37;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(15, 23, 42, 0.95) 100%);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.35), inset 0 0 12px rgba(212, 175, 55, 0.15);
+  transform: translateY(-2px);
+}
+
+.franchise-chip.leading {
+  border-color: #38bdf8;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.2) 0%, rgba(15, 23, 42, 0.95) 100%);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+  cursor: not-allowed;
+}
+
+.franchise-chip:disabled:not(.leading) {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}
+
+.accept-bid-btn {
+  background: linear-gradient(135deg, #B08B4F 0%, #D4AF37 50%, #C99D5F 100%);
+  color: #0c0d12;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.35), 0 0 20px rgba(212, 175, 55, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+}
+
+.accept-bid-btn:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 14px 40px rgba(212, 175, 55, 0.5), 0 0 30px rgba(212, 175, 55, 0.3);
+  filter: brightness(1.08);
+}
+
+.accept-bid-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.accept-bid-btn:disabled {
+  background: linear-gradient(135deg, #475569 0%, #334155 100%);
+  color: #94a3b8;
+  border-color: rgba(255, 255, 255, 0.05);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.bidding-feed-container {
+  max-height: 110px;
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 14, 26, 0.75);
+  border-radius: 8px;
+}
+
+.bidding-feed-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  transition: background 0.2s;
+}
+
+.bidding-feed-item:last-child {
+  border-bottom: none;
+}
+
+.bidding-feed-item:first-child {
+  background: rgba(212, 175, 55, 0.1);
+  font-weight: 700;
+}
