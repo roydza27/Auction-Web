@@ -1,0 +1,231 @@
+const Team = require('../models/team.model');
+const Player = require('../models/player.model');
+
+// Create new team
+exports.createTeam = async (req, res) => {
+  try {
+    const { name } = req.body;
+    const totalSlots = req.body.totalSlots ? parseInt(req.body.totalSlots, 10) : 11;
+    const budget = req.body.budget !== undefined && req.body.budget !== '' && req.body.budget !== null
+      ? parseInt(req.body.budget, 10)
+      : null;
+    
+    let logoUrl = req.body.logoUrl || '';
+    if (req.file) {
+      logoUrl = `/uploads/${req.file.filename}`;
+    }
+    
+    const team = new Team({
+      name,
+      totalSlots,
+      budget,
+      remainingBudget: budget,
+      logoUrl
+    });
+
+    await team.save();
+
+    // Emit socket event for real-time updates
+    const io = req.app.get('io');
+    if (io) {
+      io.emit('teamCreated', team);
+    }
+
+    res.status(201).json(team);
+  } catch (error) {
+    if (error.code === 11000) { // Duplicate key error
+      return res.status(400).json({ error: 'Team name already exists' });
+    }
+    res.status(500).json({ error: 'Error creating team' });
+  }
+};
+
+// Update team
+exports.updateTeam = async (req, res) => {
+  try {
+    const { teamId } = req.params;
+    const updateData = req.body;
+
+    const team = await Team.findById(teamId);
+    if (!team) {
+      return res.status(404).json({ error: 'Team not found' });
+    }
+
+    // Handle MongoDB $push operation for adding players
+    if (updateData.$push && updateData.$push.players) {
+      const pId = String(updateData.$push.players);
+      const isAlreadyAdded = team.players.map(String).includes(pId);
+
+      if (!isAlreadyAdded) {
+        team.players.push(updateData.$push.players);
+        team.filledSlots = team.players.length;
+        
+        // Deduct soldAmount from remainingBudget if provided
+        if (updateData.soldAmount && typeof updateData.soldAmount === 'number') {
+          team.remainingBudget = (team.remainingBudget !== undefined && team.remainingBudget !== null ? team.remainingBudget : team.budget) - updateData.soldAmount;
+        }
+        
+        await team.save();
+      }
+      
+      // Emit socket event for real-time updates
+      const io = req.app.get('io');
+      if (io) {
+        io.emit('teamUpdated', team);
+      }
+      
+      return res.json(team);
+    }
+
+    // Regular update fields
+    const { name, totalSlots, budget, logoUrl } = updateData;
+
+    // Handle uploaded file if present
+    if (req.file) {
+      team.logoUrl = `/uploads/${req.file.filename}`;
+    } else if (logoUrl !== undefined) {
+      team.logoUrl = logoUrl;
+    }
+
+    // Validate and update total slots
+    if (totalSlots !== undefined) {
+      const parsedSlots = parseInt(totalSlots, 10);
+      if (parsedSlots < team.filledSlots) {
+        return res.status(400).json({ 
+          error: 'New total slots cannot be less than current filled slots' 
+        });
+      }
+      team.totalSlots = parsedSlots;
+    }
+
+    // Update name
+    if (name) team.name = name;
+
+    // Update budget
+    if (budget !== undefined && budget !== '') {
+      const parsedBudget = parseInt(budget, 10);
+      const spentBudget = team.budget ? (team.budget - (team.remainingBudget || 0)) : 0;
+      team.budget = parsedBudget;
+      team.remainingBudget = parsedBudget - spentBudget;
+    }
+
+    await team.save();
+    
+    // Emit socket event for real-time updates
+    const io = req.app.get('io');
+    if (io) {
+      io.emit('teamUpdated', team);
+    }
+    
+    res.json(team);
+  } catch (error) {
+    if (error.code === 11000) {
+      return res.status(400).json({ error: 'Team name already exists' });
+    }
+    res.status(500).json({ error: 'Error updating team' });
+  }
+};
+
+// Delete team
+exports.deleteTeam = async (req, res) => {
+  try {
+    const { teamId } = req.params;
+    const team = await Team.findById(teamId);
+    
+    if (!team) {
+      return res.status(404).json({ error: 'Team not found' });
+    }
+
+    // Check if team has players
+    if (team.filledSlots > 0) {
+      return res.status(400).json({ 
+        error: 'Cannot delete team with assigned players' 
+      });
+    }
+
+    await team.deleteOne();
+    res.json({ message: 'Team deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error deleting team' });
+  }
+};
+
+// Get all teams
+exports.getAllTeams = async (req, res) => {
+  try {
+    // OPTIMIZED: Only populate necessary fields, not full player objects
+    const teams = await Team.find()
+      .populate('players', 'name regNo class position soldAmount') // Only specific fields
+      .lean(); // Return plain objects (faster)
+    res.json(teams);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching teams' });
+  }
+};
+
+// Get team by ID
+exports.getTeamById = async (req, res) => {
+  try {
+    const { teamId } = req.params;
+    const team = await Team.findById(teamId)
+      .populate('players', 'name regNo class position soldAmount')
+      .lean();
+    
+    if (!team) {
+      return res.status(404).json({ error: 'Team not found' });
+    }
+
+    res.json(team);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching team' });
+  }
+};
+
+// Get final results
+exports.getFinalResults = async (req, res) => {
+  try {
+    const teams = await Team.find()
+      .populate('players', 'name regNo class position soldAmount')
+      .sort('name')
+      .lean();
+
+    const results = teams.map(team => ({
+      teamName: team.name,
+      totalPlayers: team.filledSlots,
+      totalSlots: team.totalSlots,
+      budget: team.budget,
+      remainingBudget: team.remainingBudget,
+      players: team.players.map(player => ({
+        name: player.name,
+        regNo: player.regNo,
+        class: player.class,
+        position: player.position,
+        soldAmount: player.soldAmount
+      }))
+    }));
+
+    res.json(results);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching final results' });
+  }
+};
+
+// Delete all teams (for auction reset)
+exports.deleteAllTeams = async (req, res) => {
+  try {
+    const result = await Team.deleteMany({});
+    
+    // Emit socket event for real-time updates
+    const io = req.app.get('io');
+    if (io) {
+      io.emit('dataReset');
+    }
+    
+    res.json({ 
+      message: 'All teams deleted successfully', 
+      deletedCount: result.deletedCount 
+    });
+  } catch (error) {
+    res.status(500).json({ error: 'Error deleting all teams' });
+  }
+};
