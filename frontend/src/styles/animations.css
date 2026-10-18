@@ -1,0 +1,81 @@
+/* ═══════════════════════════════════════════════════════════
+   CENTRALIZED ANIMATIONS & KEYFRAMES
+   ═══════════════════════════════════════════════════════════ */
+
+@keyframes goldShimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+
+@keyframes pulseGold {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.03);
+  }
+}
+
+@keyframes luxuryGlow {
+  0%, 100% {
+    box-shadow: 0 10px 50px rgba(212, 175, 55, 0.25), inset 0 0 30px rgba(212, 175, 55, 0.08);
+  }
+  50% {
+    box-shadow: 0 20px 80px rgba(212, 175, 55, 0.45), inset 0 0 50px rgba(212, 175, 55, 0.15);
+  }
+}
+
+@keyframes elegantEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(15px);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 300ms ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 350ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-luxury-glow {
+  animation: luxuryGlow 4s ease-in-out infinite;
+}
+
+.animate-pulse-gold {
+  animation: pulseGold 2s ease-in-out infinite;
+}

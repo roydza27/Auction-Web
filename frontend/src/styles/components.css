@@ -1,0 +1,180 @@
+/* ═══════════════════════════════════════════════════════════
+   CENTRALIZED COMPONENT STYLES
+   Reusable UI classes consuming centralized theme tokens
+   ═══════════════════════════════════════════════════════════ */
+
+/* 1. Card Containers */
+.theme-card {
+  background: var(--theme-gradient-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: var(--theme-border-gold-thin);
+  box-shadow: var(--theme-shadow-card);
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-normal);
+}
+
+.theme-card:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+.theme-card-elevated {
+  background: var(--theme-gradient-card-elevated);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: var(--theme-border-gold-medium);
+  box-shadow: var(--theme-shadow-card-hover);
+  border-radius: var(--border-radius-lg);
+  transition: all var(--transition-normal);
+}
+
+/* 2. Header Container */
+.theme-header {
+  background: var(--theme-gradient-header);
+  backdrop-filter: blur(25px) saturate(1.5);
+  -webkit-backdrop-filter: blur(25px) saturate(1.5);
+  border-bottom: var(--theme-border-gold-medium);
+  box-shadow: var(--theme-shadow-header);
+}
+
+/* 3. Text Gradients & Typography */
+.theme-gradient-title {
+  background: var(--theme-gradient-title);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 10px rgba(212, 175, 55, 0.3));
+}
+
+.theme-gradient-title-alt {
+  background: var(--theme-gradient-title-alt);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 10px rgba(212, 175, 55, 0.3));
+}
+
+.text-gold {
+  color: var(--theme-gold-cartier);
+}
+
+.text-gold-light {
+  color: var(--theme-gold-bulgari);
+}
+
+.text-gold-champagne {
+  color: var(--theme-gold-champagne);
+}
+
+/* 4. Stat Box / Mini Pill */
+.theme-stat-box {
+  background: var(--theme-gradient-card);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  border-radius: var(--border-radius-sm);
+}
+
+/* 5. Navigation Links */
+.theme-nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  font-size: 0.8125rem;
+  font-family: var(--font-modern);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--theme-text-primary);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  transition: all var(--transition-normal);
+  text-decoration: none;
+}
+
+.theme-nav-link:hover {
+  background: var(--theme-gradient-nav-hover);
+  border-color: rgba(212, 175, 55, 0.2);
+  color: var(--theme-gold-bulgari);
+}
+
+.theme-nav-link-active {
+  background: var(--theme-gradient-nav-active);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: var(--theme-border-gold-active);
+  color: var(--theme-gold-bulgari);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Active Indicator Bar */
+.theme-nav-indicator {
+  position: absolute;
+  bottom: -2px;
+  left: 20px;
+  right: 20px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--theme-gold-bulgari) 50%, transparent 100%);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+}
+
+/* 6. Inputs & Form Controls */
+.theme-input {
+  font-family: var(--font-modern);
+  background: rgba(26, 26, 26, 0.8);
+  border: var(--theme-border-gold-thin);
+  color: var(--theme-text-primary);
+  border-radius: var(--border-radius-md);
+  padding: 0.5rem 1rem;
+  transition: all var(--transition-normal);
+}
+
+.theme-input:focus {
+  border-color: var(--theme-gold-cartier);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+  outline: none;
+}
+
+/* 7. Buttons */
+.theme-btn-gold {
+  background: linear-gradient(135deg, var(--theme-gold-champagne) 0%, var(--theme-gold-cartier) 50%, var(--theme-gold-bulgari) 100%);
+  color: #000000;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+}
+
+.theme-btn-gold:hover {
+  box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5);
+  transform: translateY(-1px);
+}
+
+.theme-btn-outline {
+  background: transparent;
+  border: var(--theme-border-gold-thin);
+  color: var(--theme-gold-cartier);
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+}
+
+.theme-btn-outline:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: var(--theme-gold-cartier);
+  color: var(--theme-gold-bulgari);
+}
+
+/* 8. Wheel Segments */
+.wheel-segment-gold {
+  background: linear-gradient(135deg, #B8941E 0%, #D4AF37 30%, #F0D770 50%, #D4AF37 70%, #A67C00 100%);
+}
+
+.wheel-segment-dark {
+  background: linear-gradient(135deg, #0D1117 0%, #1A1F2E 30%, #242B3D 50%, #1A1F2E 70%, #0D1117 100%);
+}

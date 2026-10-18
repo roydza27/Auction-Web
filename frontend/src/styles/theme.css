@@ -1,0 +1,212 @@
+/* ═══════════════════════════════════════════════════════════
+   CENTRALIZED THEME DESIGN TOKENS
+   Single Source of Truth for the Entire Application
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  /* ═══════════════════════════════════════════════════════
+     1. COLOR PALETTE - Exact Black & Gold Luxury Theme
+     ═══════════════════════════════════════════════════════ */
+  
+  /* Pure Blacks & Dark Neutrals */
+  --theme-bg-pure: #000000;
+  --theme-bg-midnight: #0a0a0a;
+  --theme-bg-charcoal: #1a1a1a;
+  --theme-bg-rich: #121212;
+  --theme-bg-soft: #1f1f1f;
+  --theme-bg-elevated: #0d1117;
+  
+  /* Legacy Black Aliases for Full Backward Compatibility */
+  --black-pure: var(--theme-bg-pure);
+  --black-midnight: var(--theme-bg-midnight);
+  --black-charcoal: var(--theme-bg-charcoal);
+  --black-rich: var(--theme-bg-rich);
+  --black-soft: var(--theme-bg-soft);
+
+  /* Premium Golds & Accent Metallic Tones */
+  --theme-gold-cartier: #D4AF37;        /* 24k pure gold - Primary Brand Accent */
+  --theme-gold-bulgari: #FFD700;        /* Yellow gold highlight */
+  --theme-gold-vancleef: #E5C100;       /* Vibrant gold */
+  --theme-gold-tiffany: #F4C430;        /* Saffron gold */
+  --theme-gold-rolex: #C9A661;          /* Champagne gold */
+  --theme-gold-hermes: #C8A882;         /* Beige gold */
+  --theme-gold-champagne: #B08B4F;      /* Muted champagne accent */
+  --theme-gold-amber: #C99D5F;          /* Warm gold amber */
+  --theme-gold-light: #F0D770;          /* Bright light gold */
+  
+  /* Legacy Gold Aliases for Full Backward Compatibility */
+  --gold-cartier: var(--theme-gold-cartier);
+  --gold-bulgari: var(--theme-gold-bulgari);
+  --gold-vancleef: var(--theme-gold-vancleef);
+  --gold-tiffany: var(--theme-gold-tiffany);
+  --gold-rolex: var(--theme-gold-rolex);
+  --gold-hermes: var(--theme-gold-hermes);
+
+  /* Bronze & Wine Accent Tones (Used in Budget/Slot Indicators) */
+  --theme-bronze-wine: #7D4B57;
+  --theme-bronze-wine-light: #8D5B67;
+  --theme-bronze-dark: #A07A3F;
+
+  /* Royal & Deep Tones */
+  --theme-blue-royal: #1e3a8a;
+  --theme-blue-sapphire: #0f172a;
+  --theme-blue-midnight: #1e40af;
+  --theme-purple-imperial: #581c87;
+  --theme-purple-amethyst: #7c3aed;
+  --theme-purple-deep: #3b0764;
+
+  /* Legacy Royal Aliases */
+  --blue-royal: var(--theme-blue-royal);
+  --blue-sapphire: var(--theme-blue-sapphire);
+  --blue-midnight: var(--theme-blue-midnight);
+  --purple-imperial: var(--theme-purple-imperial);
+  --purple-amethyst: var(--theme-purple-amethyst);
+  --purple-deep: var(--theme-purple-deep);
+
+  /* Neutrals & Text */
+  --theme-text-primary: #FFFFFF;
+  --theme-text-pearl: #F5F5F0;
+  --theme-text-ivory: #FAFAFA;
+  --theme-text-muted: #71717a;
+  --theme-text-slate: #52525b;
+  --theme-text-smoke: #3f3f46;
+
+  /* Legacy Neutral Aliases */
+  --white-platinum: var(--theme-text-primary);
+  --white-pearl: var(--theme-text-pearl);
+  --white-ivory: var(--theme-text-ivory);
+  --gray-steel: var(--theme-text-muted);
+  --gray-slate: var(--theme-text-slate);
+  --gray-smoke: var(--theme-text-smoke);
+
+  /* Status Colors */
+  --theme-status-success: #10b981;
+  --theme-status-error: #dc2626;
+  --theme-status-warning: #f59e0b;
+  --theme-status-info: #3b82f6;
+
+  --success-emerald: var(--theme-status-success);
+  --error-ruby: var(--theme-status-error);
+  --warning-amber: var(--theme-status-warning);
+  --info-sapphire: var(--theme-status-info);
+
+  /* ═══════════════════════════════════════════════════════
+     2. GRADIENTS - Luxury Transitions
+     ═══════════════════════════════════════════════════════ */
+  
+  --theme-gradient-bg: linear-gradient(
+    160deg,
+    #000000 0%,
+    #0a0a0a 25%,
+    #1a1a1a 50%,
+    #0f172a 75%,
+    #1a1a1a 100%
+  );
+  
+  --theme-gradient-header: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(26, 26, 26, 0.9) 50%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+  
+  --theme-gradient-title: linear-gradient(
+    135deg,
+    #FFFFFF 0%,
+    #F0D770 50%,
+    #D4AF37 100%
+  );
+
+  --theme-gradient-title-alt: linear-gradient(
+    180deg,
+    #FFFFFF 0%,
+    #F5F5F0 30%,
+    #FFD700 60%,
+    #D4AF37 100%
+  );
+  
+  --theme-gradient-card: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(10, 10, 10, 0.6) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+
+  --theme-gradient-card-elevated: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(26, 26, 26, 0.8) 50%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+
+  --theme-gradient-gold-shimmer: linear-gradient(
+    135deg,
+    #D4AF37 0%,
+    #FFD700 33%,
+    #E5C100 66%,
+    #D4AF37 100%
+  );
+
+  --theme-gradient-nav-active: linear-gradient(
+    135deg,
+    rgba(212, 175, 55, 0.15) 0%,
+    rgba(255, 215, 0, 0.1) 100%
+  );
+
+  --theme-gradient-nav-hover: linear-gradient(
+    135deg,
+    rgba(212, 175, 55, 0.1) 0%,
+    rgba(255, 215, 0, 0.05) 100%
+  );
+
+  --gradient-gold-shimmer: var(--theme-gradient-gold-shimmer);
+  --gradient-platinum-gold: var(--theme-gradient-title-alt);
+  --gradient-black-glass: var(--theme-gradient-card-elevated);
+
+  /* ═══════════════════════════════════════════════════════
+     3. BORDERS & SHADOWS - Luxury Glow & Depths
+     ═══════════════════════════════════════════════════════ */
+  
+  --theme-border-gold-subtle: 1px solid rgba(212, 175, 55, 0.2);
+  --theme-border-gold-thin: 1px solid rgba(212, 175, 55, 0.25);
+  --theme-border-gold-medium: 2px solid rgba(212, 175, 55, 0.3);
+  --theme-border-gold-active: 1px solid rgba(212, 175, 55, 0.4);
+  --theme-border-gold-strong: 2px solid rgba(212, 175, 55, 0.6);
+  --theme-border-gold-thick: 3px solid rgba(212, 175, 55, 0.8);
+
+  --border-gold-thin: var(--theme-border-gold-thin);
+  --border-gold-medium: var(--theme-border-gold-strong);
+  --border-gold-thick: var(--theme-border-gold-thick);
+
+  --theme-shadow-header: 0 4px 30px rgba(0, 0, 0, 0.8), 0 0 40px rgba(212, 175, 55, 0.1);
+  --theme-shadow-card: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 175, 55, 0.1);
+  --theme-shadow-card-hover: 0 8px 30px rgba(0, 0, 0, 0.7), 0 0 40px rgba(212, 175, 55, 0.2);
+  --theme-shadow-gold-glow: 0 0 40px rgba(212, 175, 55, 0.3);
+  --theme-shadow-gold-strong: 0 0 60px rgba(212, 175, 55, 0.5);
+
+  --shadow-gold-glow: var(--theme-shadow-gold-glow);
+  --shadow-gold-strong: var(--theme-shadow-gold-strong);
+  --shadow-premium-card: var(--theme-shadow-card);
+  --shadow-premium-hover: var(--theme-shadow-card-hover);
+
+  /* ═══════════════════════════════════════════════════════
+     4. TYPOGRAPHY & SPACING
+     ═══════════════════════════════════════════════════════ */
+  
+  --font-luxury: 'Playfair Display', Georgia, serif;
+  --font-elegant: 'Cormorant Garamond', Georgia, serif;
+  --font-modern: 'Montserrat', 'Helvetica Neue', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 16px;
+  --border-radius-xl: 20px;
+  --border-radius-2xl: 24px;
+  --border-radius-full: 9999px;
+
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-luxury: 600ms cubic-bezier(0.19, 1, 0.22, 1);
+}
